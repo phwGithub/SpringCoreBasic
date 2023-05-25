@@ -18,7 +18,15 @@ public class OrderServiceImpl implements OrderService{
     // 객체지향설계 원칙 중 OCP와 DIP를 지키지 못했다
     // why? 클라이언트(OrderServiceImpl)가 인터페이스와 구현체 모두 의존하고 있기 때문 -> DIP 위반
     // => 기능을 변경하려면 클라이언트 코드를 변경해야 한다 -> OCP 위반
-    private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
+
+    // 해결책
+    // DIP 원칙 준수를 위해
+    // 구현 클래스 의존을 모두 지우고 인터페이스에만 의존한다
+    // 준수는 하였지만 구현체없이 코드를 실행해야하는 문제가 발생했다
+    // => 누군가가 대신 구현체를 생성하고 주입해야 주어야 한다
+    // 누가 이것을 해줄까?
+    // private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
+    private DiscountPolicy discountPolicy;
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
