@@ -9,7 +9,6 @@ import hello.core.member.MemoryMemberRepository;
 
 public class OrderServiceImpl implements OrderService{
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
     // private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
 
     // 정률할인 적용을 위해 할인정책 구현체를 변경해야 한다
@@ -26,7 +25,18 @@ public class OrderServiceImpl implements OrderService{
     // => 누군가가 대신 구현체를 생성하고 주입해야 주어야 한다
     // 누가 이것을 해줄까?
     // private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
-    private DiscountPolicy discountPolicy;
+
+    // AppConfig라는 구현체를 생성하고 주입하는 것을 전문으로 하는 클래스가 만들어졌다
+    // 클라이언트에서는 인터페이스만 의존하도록 하고 생성자를 통해 실제 구현체를 받을 수 있도록 한다
+    // 어떤 구현체가 주입이 될지는 여기서 알 수 없다 => 실행에만 집중
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
+
+    // 생성자를 만들어 AppConfig가 위의 두 가지에 인터페이스에 구현체를 주입할 수 있도록 한다
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
