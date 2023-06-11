@@ -19,19 +19,35 @@ import org.springframework.context.annotation.Configuration;
 @Configuration // 스프링 전환을 위한 선언
 public class AppConfig {
 
+    // 실행 과정 예쌍
+    // call AppConfig.memberService
+    // call AppConfig.memberRepository
+    // call AppConfig.orderService
+    // call AppConfig.memberRepository
+
+    // 실제 실행 과정
+    // call AppConfig.memberService
+    // call AppConfig.memberRepository
+    // call AppConfig.orderService
+    // 어째서? 스프링이 싱글톤을 보장하기 위해 무언가를 함
+
+
     @Bean
     public MemberService memberService() {
+        System.out.println("call AppConfig.memberService"); // Configuration 싱글톤 테스트
         return new MemberServiceImpl(memberRepository());
     }
 
     // 역할을 명확하게 하기 위해 memberService() 에서 분리
     @Bean
     public MemberRepository memberRepository() {
+        System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
     @Bean
     public OrderService orderService() {
+        System.out.println("call AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
