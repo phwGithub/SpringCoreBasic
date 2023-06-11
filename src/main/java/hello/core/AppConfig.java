@@ -16,7 +16,9 @@ import org.springframework.context.annotation.Configuration;
 // 여기서 만들어진 구현체를 클라이언트(MemberServiceImpl, OrderServiceImpl)에 생성자를 통해서 주입한다
 // 어떤 구현체를 주입할지는 여기서 결정한다 => 관심사의 분리
 
-@Configuration // 스프링 전환을 위한 선언
+// 스프링 전환을 위한 선언
+// 선언하지 않을 경우 싱글톤으로 작동하지 않는다
+@Configuration
 public class AppConfig {
 
     // 실행 과정 예쌍

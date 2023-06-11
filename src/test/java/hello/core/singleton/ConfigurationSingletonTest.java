@@ -29,4 +29,17 @@ public class ConfigurationSingletonTest {
         Assertions.assertThat(memberService.getMemberRepository()).isSameAs(memberRepository);
         Assertions.assertThat(orderService.getMemberRepository()).isSameAs(memberRepository);
     }
+
+    @Test
+    void configurationDeep() {
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+        AppConfig bean = ac.getBean(AppConfig.class); // xxxxCGLIB는 AppConfig의 자식 클래스라 조회됨
+
+        System.out.println("bean = " + bean.getClass());
+        // 빈 이름 뒤에 $$xxxxCGLIB 이 붙는다 뭘까?
+        // 이는 내가 등록한 AppConfig가 아닌 이 AppConfig를 상속한 임의의 클래스를 자동으로 만들어준 것이다
+        // 이 클래스에서 싱글톤을 보장해주는 기능을 수행한다
+        // ex) memoryMemberRepository가 이미 컨테이너에 존재하면 -> 컨테이너에서 찾아서 반환
+        // ex) memoryMemberRepository가 컨테이너에 존재하지 않으면 -> 객체를 생성해서 컨테이너에 등록 후 반환
+    }
 }
