@@ -1,5 +1,7 @@
 package hello.core;
 
+import hello.core.member.MemoryMemberRepository;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
@@ -14,4 +16,11 @@ import org.springframework.context.annotation.FilterType;
         excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Configuration.class)
 )
 public class AutoAppConfig {
+
+    // 수동 빈 등록 시 자동 빈과 이름이 같다면 오버라이딩 함, 오류 없음
+    // 스프링 부트에서는 자동 빈과 수동 빈 충돌 시 오류로 되도록 기본 설정 변경
+    @Bean(name = "memoryMemberRepository")
+    MemoryMemberRepository memberRepository() {
+        return new MemoryMemberRepository();
+    }
 }
