@@ -24,6 +24,7 @@ public class AppConfig {
     // 실행 과정 예쌍
     // call AppConfig.memberService
     // call AppConfig.memberRepository
+    // call AppConfig.memberRepository
     // call AppConfig.orderService
     // call AppConfig.memberRepository
 
