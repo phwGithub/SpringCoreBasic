@@ -52,6 +52,7 @@ public class AppConfig {
     public OrderService orderService() {
         System.out.println("call AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy());
+//        return null;
     }
 
     // 역할을 명확하게 하기 위해 orderService() 에서 분리
