@@ -19,8 +19,8 @@ public class AutoAppConfig {
 
     // 수동 빈 등록 시 자동 빈과 이름이 같다면 오버라이딩 함, 오류 없음
     // 스프링 부트에서는 자동 빈과 수동 빈 충돌 시 오류로 되도록 기본 설정 변경
-    @Bean(name = "memoryMemberRepository")
-    MemoryMemberRepository memberRepository() {
-        return new MemoryMemberRepository();
-    }
+//    @Bean(name = "memoryMemberRepository")
+//    MemoryMemberRepository memberRepository() {
+//        return new MemoryMemberRepository();
+//    }
 }
