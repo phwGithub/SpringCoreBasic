@@ -8,6 +8,7 @@ import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -44,9 +45,10 @@ public class OrderServiceImpl implements OrderService{
 //    }
 
     // 생성자를 만들어 AppConfig가 위의 두 가지에 인터페이스에 구현체를 주입할 수 있도록 한다
-    // @Autowired 생성자가 하나일 시 생략 가능
+//    @Autowired //생성자가 하나일 시 생략 가능
     // @RequiredArgsConstructor로 대체
-//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    // @Qualifier("mainDiscountPolicy") 로 지정할 수 있음
+//    public OrderServiceImpl(MemberRepository memberRepository,DiscountPolicy discountPolicy) {
 //        this.memberRepository = memberRepository;
 //        this.discountPolicy = discountPolicy;
 //    }
