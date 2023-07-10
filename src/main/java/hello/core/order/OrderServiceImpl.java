@@ -1,5 +1,6 @@
 package hello.core.order;
 
+import hello.core.annotation.MainDiscountPolicy;
 import hello.core.discount.DiscountPolicy;
 import hello.core.discount.FixDiscountPolicy;
 import hello.core.discount.RateDiscountPolicy;
@@ -12,7 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService{
 
     // private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
@@ -45,13 +46,13 @@ public class OrderServiceImpl implements OrderService{
 //    }
 
     // 생성자를 만들어 AppConfig가 위의 두 가지에 인터페이스에 구현체를 주입할 수 있도록 한다
-//    @Autowired //생성자가 하나일 시 생략 가능
+    @Autowired //생성자가 하나일 시 생략 가능
     // @RequiredArgsConstructor로 대체
     // @Qualifier("mainDiscountPolicy") 로 지정할 수 있음
-//    public OrderServiceImpl(MemberRepository memberRepository,DiscountPolicy discountPolicy) {
-//        this.memberRepository = memberRepository;
-//        this.discountPolicy = discountPolicy;
-//    }
+    public OrderServiceImpl(MemberRepository memberRepository,@MainDiscountPolicy DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
