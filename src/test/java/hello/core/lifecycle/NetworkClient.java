@@ -1,5 +1,8 @@
 package hello.core.lifecycle;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 public class NetworkClient {
 
     private String url;
@@ -27,6 +30,7 @@ public class NetworkClient {
     }
 
     // 의존관계 주입이 끝난 후 실행되는 콜백 함수
+    @PostConstruct
     public void init() throws Exception {
         System.out.println("NetworkClient.init");
         connect();
@@ -34,6 +38,7 @@ public class NetworkClient {
     }
 
     // 빈이 종료될 때 호출되는 콜백 함수
+    @PreDestroy
     public void close() throws Exception {
         System.out.println("NetworkClient.close");
         disconnect();
