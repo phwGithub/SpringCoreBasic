@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 public class LogDemoService {
 
     // request에 필요한 정보를 파라미터로 넘기지 않고 request 스코프를 사용하여 코드를 깔끔하게 했다
-    private final ObjectProvider<MyLogger> myLoggerObjectProvider;
+    private final MyLogger myLogger;
 
     public void logic(String id) {
-        MyLogger myLogger = myLoggerObjectProvider.getObject();
+//        MyLogger myLogger = myLoggerObjectProvider.getObject();
         myLogger.log("service id = " + id);
     }
 }
